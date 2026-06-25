@@ -35,3 +35,6 @@ coverage/
 Thumbs.db
 .vscode/
 .idea/
+
+# Local helper workspace for the GitHub profile README repository
+github-profile-homepage/
