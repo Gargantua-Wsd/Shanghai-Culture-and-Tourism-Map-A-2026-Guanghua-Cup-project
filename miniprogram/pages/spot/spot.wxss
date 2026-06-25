@@ -1,0 +1,412 @@
+.spot-page {
+  height: 100vh;
+  background: var(--bg-page);
+}
+
+/* 照片区 */
+.spot-hero {
+  width: 100%;
+  height: 420rpx;
+}
+
+.photo-swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+}
+
+.spot-hero-placeholder {
+  width: 100%;
+  height: 280rpx;
+  background: linear-gradient(135deg, #f5f3ef, #fefaf0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12rpx;
+  padding: 40rpx;
+  border: 2rpx dashed var(--dashed);
+  border-radius: var(--radius-card);
+}
+
+.hero-empty-icon {
+  font-size: 56rpx;
+}
+
+.hero-empty-text {
+  font-size: var(--font-sm);
+  color: var(--text-light);
+}
+
+/* 内容区 */
+.spot-content {
+  padding: 32rpx 24rpx;
+  padding-bottom: 160rpx;
+}
+
+/* 标题 + 评分 */
+.title-block {
+  margin-bottom: 32rpx;
+}
+
+.spot-name {
+  font-family: "KaiTi", "STKaiti", "FZXingKai-S04", serif;
+  font-size: var(--font-xl);
+  font-weight: 700;
+  color: var(--text-title);
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+.tags-row {
+  display: flex;
+  gap: 12rpx;
+  margin-bottom: 16rpx;
+}
+
+.type-tag {
+  padding: 6rpx 20rpx;
+  background: linear-gradient(135deg, var(--gold-bg), #efcd8a);
+  border-radius: var(--radius-tag);
+  font-size: var(--font-xs);
+  color: var(--gold-dark);
+  font-weight: 600;
+}
+
+.district-tag {
+  padding: 6rpx 20rpx;
+  border: 1rpx solid var(--gold-light);
+  border-radius: var(--radius-tag);
+  font-size: var(--font-xs);
+  color: var(--text-sub);
+}
+
+/* 评分行 */
+.rating-row {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+}
+
+.rating-stars {
+  display: flex;
+  gap: 4rpx;
+}
+
+.star-display {
+  font-size: 32rpx;
+  color: #e0d8c8;
+}
+
+.star-display.active {
+  color: var(--gold);
+}
+
+.rating-text {
+  font-family: "KaiTi", "STKaiti", "FZXingKai-S04", serif;
+  font-size: var(--font-lg);
+  font-weight: 700;
+  color: var(--gold-dark);
+}
+
+.rating-count {
+  font-size: var(--font-xs);
+  color: var(--text-light);
+}
+
+/* ===== 分区标题 ===== */
+.section-block {
+  margin-bottom: 36rpx;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 16rpx;
+  padding-bottom: 12rpx;
+  border-bottom: 2rpx solid var(--gold-light);
+}
+
+.section-num {
+  width: 44rpx;
+  height: 44rpx;
+  line-height: 44rpx;
+  text-align: center;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: #fff;
+  font-family: "KaiTi", "STKaiti", serif;
+  font-size: var(--font-sm);
+  font-weight: 700;
+  border-radius: 8rpx;
+}
+
+.section-label {
+  font-family: "KaiTi", "STKaiti", "FZXingKai-S04", serif;
+  font-size: var(--font-md);
+  font-weight: 700;
+  color: var(--text-title);
+}
+
+/* 简介 */
+.desc-block {
+  margin-top: 16rpx;
+  line-height: 1.8;
+}
+
+.desc-text {
+  font-size: var(--font-base);
+  color: var(--text-body);
+}
+
+/* ===== 景点百科卡片 ===== */
+.baike-card {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  padding: 24rpx;
+  background: #fff;
+  border: 1rpx solid var(--gold-light);
+  border-radius: var(--radius-card);
+}
+
+.baike-card:active {
+  background: rgba(196, 154, 43, 0.06);
+}
+
+.baike-icon {
+  font-size: 44rpx;
+}
+
+.baike-info {
+  flex: 1;
+}
+
+.baike-title {
+  display: block;
+  font-family: "KaiTi", "STKaiti", "FZXingKai-S04", serif;
+  font-size: var(--font-base);
+  font-weight: 600;
+  color: var(--text-title);
+  margin-bottom: 4rpx;
+}
+
+.baike-desc {
+  font-size: var(--font-xs);
+  color: var(--text-light);
+}
+
+.baike-arrow {
+  font-size: var(--font-lg);
+  color: var(--gold);
+}
+
+/* 名人卡片 */
+.celebrity-card {
+  border: 2rpx dashed var(--dashed);
+  border-radius: var(--radius-card);
+  padding: 24rpx;
+  background: rgba(254, 250, 240, 0.5);
+}
+
+.celebrity-card:active {
+  background: rgba(196, 154, 43, 0.08);
+}
+
+.celebrity-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.celebrity-name {
+  font-family: "KaiTi", "STKaiti", "FZXingKai-S04", serif;
+  font-size: var(--font-md);
+  font-weight: 700;
+  color: var(--text-title);
+}
+
+.celebrity-more {
+  font-size: var(--font-xs);
+  color: var(--gold);
+}
+
+.celebrity-short {
+  font-size: var(--font-sm);
+  color: var(--text-sub);
+  line-height: 1.6;
+}
+
+/* ===== 评论区 ===== */
+.comment-form {
+  margin-bottom: 24rpx;
+}
+
+.star-row {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  margin-bottom: 16rpx;
+}
+
+.star {
+  font-size: 48rpx;
+  color: #e0d8c8;
+  transition: color 0.15s;
+}
+
+.star.active {
+  color: var(--gold);
+}
+
+.star-hint {
+  font-size: var(--font-xs);
+  color: var(--text-light);
+  margin-left: 8rpx;
+}
+
+.comment-textarea {
+  width: 100%;
+  min-height: 140rpx;
+  background: #fff;
+  border: 1rpx solid var(--gold-light);
+  border-radius: 20rpx;
+  padding: 20rpx;
+  font-size: var(--font-base);
+  box-sizing: border-box;
+  margin-bottom: 16rpx;
+}
+
+.comment-submit {
+  width: 100%;
+}
+
+/* 未登录 */
+.comment-login-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 36rpx 24rpx;
+  margin-bottom: 24rpx;
+  background: #fff;
+  border: 1rpx solid var(--gold-light);
+  border-radius: var(--radius-card);
+}
+
+.hint-text {
+  font-family: "KaiTi", "STKaiti", "FZXingKai-S04", serif;
+  font-size: var(--font-base);
+  color: var(--text-sub);
+  margin-bottom: 20rpx;
+}
+
+.comment-login-btn {
+  width: 70%;
+}
+
+/* 评论列表 */
+.comment-item {
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f0ebe0;
+}
+
+.comment-meta {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 8rpx;
+}
+
+.comment-author {
+  font-family: "KaiTi", "STKaiti", "FZXingKai-S04", serif;
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--text-title);
+}
+
+.comment-stars {
+  display: flex;
+  gap: 2rpx;
+}
+
+.star-small {
+  font-size: 22rpx;
+  color: #e0d8c8;
+}
+
+.star-small.active {
+  color: var(--gold);
+}
+
+.comment-time {
+  font-size: var(--font-xs);
+  color: var(--text-light);
+  margin-left: auto;
+}
+
+.comment-content {
+  font-size: var(--font-base);
+  color: var(--text-body);
+  line-height: 1.6;
+}
+
+.comment-more {
+  text-align: center;
+  padding: 24rpx 0 8rpx;
+}
+
+.comment-more text {
+  font-size: var(--font-sm);
+  color: var(--gold);
+}
+
+.comment-empty {
+  text-align: center;
+  padding: 48rpx 0 24rpx;
+  color: var(--text-light);
+  font-size: var(--font-sm);
+}
+
+/* ===== 底部操作栏 ===== */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  gap: 16rpx;
+  padding: 20rpx 24rpx;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 20rpx);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20rpx);
+  border-top: 1rpx solid #f0ebe0;
+}
+
+.share-btn {
+  flex: 1;
+}
+
+.fav-btn {
+  flex: 1;
+}
+
+.fav-btn.favorited {
+  color: var(--gold-dark);
+  border-color: var(--gold);
+  background: rgba(248, 227, 176, 0.3);
+}
+
+.itinerary-btn {
+  flex: 2;
+}

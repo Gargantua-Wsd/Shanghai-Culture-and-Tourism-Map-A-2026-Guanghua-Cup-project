@@ -1,0 +1,165 @@
+<view class="map-page">
+  <!-- 搜索栏 -->
+  <view class="search-bar {{searchFocus ? 'focused' : ''}}" style="top: {{searchBarTop}}px;">
+    <view class="search-input-wrap">
+      <text class="search-icon">🔍</text>
+      <input
+        class="search-input"
+        placeholder="搜索景点名称、地址..."
+        placeholder-style="color: #9a9287"
+        value="{{searchText}}"
+        bindinput="onSearchInput"
+        bindfocus="onSearchFocus"
+        bindblur="onSearchBlur"
+        confirm-type="search"
+        bindconfirm="onSearchConfirm"
+      />
+      <text class="clear-btn" wx:if="{{searchText}}" bindtap="clearSearch">✕</text>
+    </view>
+    <view class="filter-btn {{hasFilter ? 'active' : ''}}" bindtap="toggleFilter">
+      <text>🔽</text>
+      <text class="filter-count" wx:if="{{activeMarkers.length !== allSpots.length}}">{{activeMarkers.length}}</text>
+    </view>
+  </view>
+
+  <!-- 搜索结果下拉 -->
+  <view class="search-results" style="top: {{dropdownTop}}px" wx:if="{{searchResults.length > 0 && searchFocus}}">
+    <view
+      class="search-item"
+      wx:for="{{searchResults}}"
+      wx:key="id"
+      bindtap="onResultTap"
+      data-spot="{{item}}"
+    >
+      <text class="result-icon">{{item.typeIcon}}</text>
+      <view class="result-info">
+        <text class="result-name">{{item.name}}</text>
+        <text class="result-addr">{{item.address}}</text>
+      </view>
+      <text class="result-district">{{item.districtName}}</text>
+    </view>
+  </view>
+
+  <!-- 筛选面板 -->
+  <view class="filter-panel {{showFilter ? 'show' : ''}}" style="top: {{dropdownTop}}px">
+    <view class="filter-header">
+      <text class="filter-title">筛选条件</text>
+      <text class="filter-reset" bindtap="resetFilter">重置</text>
+    </view>
+    <view class="filter-section">
+      <text class="filter-label">区域</text>
+      <view class="filter-tags">
+        <view
+          class="tag {{selectedDistricts[item] ? 'active' : ''}}"
+          wx:for="{{districts}}"
+          wx:key="*this"
+          wx:for-item="item"
+          bindtap="toggleDistrict"
+          data-district="{{item}}"
+        >{{districtNames[item]}}</view>
+      </view>
+    </view>
+    <view class="filter-section">
+      <text class="filter-label">类型</text>
+      <view class="filter-tags">
+        <view
+          class="tag {{selectedTypes[item] ? 'active' : ''}}"
+          wx:for="{{types}}"
+          wx:key="*this"
+          wx:for-item="item"
+          bindtap="toggleType"
+          data-type="{{item}}"
+        >{{typeIcons[item]}} {{typeNames[item]}}</view>
+      </view>
+    </view>
+    <view class="filter-actions">
+      <button class="gold-btn" bindtap="applyFilter">确定</button>
+    </view>
+  </view>
+
+  <!-- 地图遮罩（筛选面板打开时） -->
+  <view class="filter-mask" wx:if="{{showFilter}}" bindtap="toggleFilter"></view>
+
+  <!-- 地图 -->
+  <map
+    id="mainMap"
+    class="main-map"
+    latitude="{{mapCenter.lat}}"
+    longitude="{{mapCenter.lng}}"
+    scale="{{mapScale}}"
+    markers="{{activeMarkers}}"
+    polyline="{{polylines}}"
+    bindmarkertap="onMarkerTap"
+    bindcallouttap="onCalloutTap"
+    bindregionchange="onRegionChange"
+    show-location="{{true}}"
+  >
+  </map>
+
+  <!-- 图例与图层控制 -->
+  <view class="legend-toggle" bindtap="toggleLegend">
+    <text>🗺️ 图层</text>
+  </view>
+
+  <view class="legend-panel {{showLegend ? 'show' : ''}}">
+    <view class="legend-header">
+      <text class="legend-title">图层开关</text>
+      <text class="legend-close" bindtap="toggleLegend">✕</text>
+    </view>
+    <view class="legend-item" wx:for="{{legendTypes}}" wx:key="type">
+      <text class="legend-icon">{{item.icon}}</text>
+      <text class="legend-name">{{item.name}}</text>
+      <switch
+        checked="{{item.visible}}"
+        bindchange="onLayerSwitch"
+        data-type="{{item.type}}"
+        color="#c49a2b"
+      />
+    </view>
+  </view>
+
+  <!-- 底部状态栏 -->
+  <view class="bottom-bar">
+    <view class="bottom-info">
+      <text class="bottom-title">🏮 沪上文创地图</text>
+      <text class="bottom-count">共 {{activeMarkers.length}} 个点位</text>
+    </view>
+    <view class="bottom-actions">
+      <view class="action-btn" bindtap="goItinerary">
+        <text>📋 行程</text>
+        <text class="badge" wx:if="{{itineraryCount > 0}}">{{itineraryCount}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 行程面板 -->
+  <view class="itinerary-panel {{showItinerary ? 'show' : ''}}">
+    <view class="itinerary-header">
+      <text class="itinerary-title">📋 我的行程</text>
+      <text class="itinerary-close" bindtap="goItinerary">✕</text>
+    </view>
+    <view class="itinerary-empty" wx:if="{{itinerary.length === 0}}">
+      <text>🎯 点击景点详情中的"加入行程"开始规划</text>
+    </view>
+    <view class="itinerary-list" wx:else>
+      <view
+        class="itinerary-item"
+        wx:for="{{itinerary}}"
+        wx:key="id"
+      >
+        <text class="itinerary-index">{{index + 1}}</text>
+        <view class="itinerary-info">
+          <text class="itinerary-name">{{item.typeIcon}} {{item.name}}</text>
+          <text class="itinerary-addr">{{item.address}}</text>
+        </view>
+        <text class="itinerary-remove" bindtap="removeFromItinerary" data-id="{{item.id}}" data-itinerary-id="{{item.itineraryId}}">✕</text>
+      </view>
+      <view class="itinerary-actions">
+        <button class="outline-btn" bindtap="showRoute">🗺️ 显示路线</button>
+        <button class="gold-btn" bindtap="clearItinerary">清空行程</button>
+      </view>
+    </view>
+  </view>
+  <view class="itinerary-mask" wx:if="{{showItinerary}}" bindtap="goItinerary"></view>
+
+</view>

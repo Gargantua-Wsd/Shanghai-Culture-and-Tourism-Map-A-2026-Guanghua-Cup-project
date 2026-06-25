@@ -1,0 +1,150 @@
+page {
+  --gold: #c49a2b;
+  --gold-dark: #b57c1c;
+  --gold-light: #eac56b;
+  --gold-bg: #f8e3b0;
+  --bg: #fefaf0;
+  --bg-page: #f5f3ef;
+  --text-title: #4a3512;
+  --text-body: #2f2e2a;
+  --text-sub: #6b6156;
+  --text-light: #9a9287;
+  --text-poem: #b47c44;
+  --dashed: #d5b880;
+  --success: #5a8f3d;
+  --warn: #d4953a;
+  --error: #c0392b;
+  --radius-card: 28rpx;
+  --radius-btn: 40rpx;
+  --radius-tag: 50rpx;
+  --font-xl: 44rpx;
+  --font-lg: 36rpx;
+  --font-md: 32rpx;
+  --font-base: 28rpx;
+  --font-sm: 24rpx;
+  --font-xs: 20rpx;
+  font-family: "FangSong", "STFangsong", "FZXingKai-S04", "KaiTi", "STKaiti", "Noto Serif SC", serif;
+  background-color: var(--bg-page);
+  color: var(--text-body);
+  font-size: var(--font-base);
+  line-height: 1.7;
+  box-sizing: border-box;
+}
+
+/* 标题使用楷体，正文使用仿宋 */
+page text, page view, page button, page input, page textarea {
+  font-family: inherit;
+}
+
+.section-title, .spot-name, .person-name,
+.legend-title, .filter-title, .itinerary-title, .bottom-title,
+.result-name, .itinerary-name, .celebrity-name, .comment-author,
+.celebrity-label, .hint-text {
+  font-family: "KaiTi", "STKaiti", "FZXingKai-S04", "FangSong", "STFangsong", serif;
+  font-weight: 700;
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gold-btn {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-btn);
+  height: 80rpx;
+  min-width: 240rpx;
+  font-size: var(--font-base);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4rpx 12rpx rgba(180, 124, 68, 0.15);
+}
+
+.gold-btn:active {
+  opacity: 0.85;
+  transform: scale(0.97);
+}
+
+.outline-btn {
+  background: transparent;
+  color: var(--gold);
+  border: 2rpx solid var(--gold-light);
+  border-radius: var(--radius-btn);
+  height: 72rpx;
+  min-width: 200rpx;
+  font-size: var(--font-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  background: #fff;
+  border: 1rpx solid var(--gold-light);
+  border-radius: var(--radius-card);
+  box-shadow: 0 4rpx 20rpx rgba(74, 53, 18, 0.06);
+  padding: 24rpx;
+  margin-bottom: 24rpx;
+}
+
+.poem-text {
+  font-style: italic;
+  color: var(--text-poem);
+  font-size: var(--font-base);
+  line-height: 1.8;
+  padding: 20rpx 24rpx;
+  border-left: 4rpx solid var(--gold);
+  background: rgba(248, 227, 176, 0.3);
+  margin: 16rpx 0;
+}
+
+.info-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-top: 20rpx;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8rpx;
+  flex: 1 1 45%;
+  min-width: 280rpx;
+  font-size: var(--font-sm);
+  color: var(--text-sub);
+}
+
+.info-item .label {
+  flex-shrink: 0;
+  color: var(--gold-dark);
+  font-weight: 600;
+}
+
+.celebrity-card {
+  border: 2rpx dashed var(--dashed);
+  border-radius: var(--radius-card);
+  padding: 24rpx;
+  margin-top: 24rpx;
+  background: rgba(254, 250, 240, 0.5);
+}
+
+.gold-divider-left {
+  border-left: 6rpx solid var(--gold);
+  padding-left: 16rpx;
+}
+
+.section-title {
+  font-size: var(--font-md);
+  font-weight: 700;
+  color: var(--text-title);
+  margin-bottom: 16rpx;
+}
+
+/* ===== 全局工具类 ===== */

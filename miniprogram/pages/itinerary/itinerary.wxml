@@ -1,0 +1,38 @@
+<view class="page">
+  <!-- Empty state -->
+  <view class="empty-state" wx:if="{{isEmpty}}">
+    <text class="empty-icon">🗺️</text>
+    <text class="empty-text">还没有行程</text>
+    <text class="empty-hint">在景点详情页点击"加入行程"开始规划</text>
+    <button class="gold-btn go-btn" bindtap="goExplore">去发现景点</button>
+  </view>
+
+  <!-- Itinerary list -->
+  <view class="content" wx:else>
+    <view class="header">
+      <text class="header-title">📋 我的行程</text>
+      <text class="header-count">共 {{itinerary.length}} 个景点</text>
+    </view>
+
+    <view class="list">
+      <view class="item" wx:for="{{itinerary}}" wx:key="id" bindtap="goToSpot" data-id="{{item.id}}">
+        <text class="item-index">{{index + 1}}</text>
+        <view class="item-info">
+          <text class="item-name">{{item.typeIcon}} {{item.name}}</text>
+          <text class="item-addr" wx:if="{{item.address}}">{{item.address}}</text>
+        </view>
+        <view class="item-actions">
+          <view class="move-btn {{index === 0 ? 'disabled' : ''}}" catchtap="moveUp" data-index="{{index}}">▲</view>
+          <view class="move-btn {{index === itinerary.length - 1 ? 'disabled' : ''}}" catchtap="moveDown" data-index="{{index}}">▼</view>
+          <view class="remove-btn" catchtap="removeFromItinerary" data-id="{{item.id}}" data-itinerary-id="{{item.itineraryId}}">✕</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- Bottom bar -->
+  <view class="bottom-bar" wx:if="{{!isEmpty}}">
+    <button class="gold-btn route-btn" bindtap="showRouteOnMap">🗺️ 在地图上显示路线</button>
+    <button class="outline-btn clear-btn" bindtap="clearAll">清空行程</button>
+  </view>
+</view>

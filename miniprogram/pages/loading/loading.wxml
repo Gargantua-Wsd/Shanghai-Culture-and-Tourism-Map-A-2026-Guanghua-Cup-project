@@ -1,0 +1,16 @@
+<view class="loading-page">
+  <image class="loading-bg" src="/images/loading.jpg" mode="aspectFill"></image>
+  <view class="loading-overlay"></view>
+
+  <view class="loading-content">
+    <text class="loading-title">沪上文旅地图</text>
+    <text class="loading-subtitle">探寻海上风华，品味沪上雅韵</text>
+
+    <view class="progress-wrap">
+      <view class="progress-track">
+        <view class="progress-fill" style="width: {{progress}}%;"></view>
+      </view>
+      <text class="progress-text">{{loadingText}}</text>
+    </view>
+  </view>
+</view>

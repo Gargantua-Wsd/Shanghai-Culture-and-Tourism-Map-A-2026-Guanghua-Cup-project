@@ -1,0 +1,354 @@
+.my-page {
+  min-height: 100vh;
+  background: var(--bg-page);
+  padding-bottom: 60rpx;
+}
+
+/* 用户信息区 */
+.user-header {
+  background: #fff;
+  margin: 24rpx;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: 0 4rpx 20rpx rgba(74, 53, 18, 0.06);
+}
+
+.user-header-bg {
+  height: 120rpx;
+  background: linear-gradient(135deg, #c49a2b 0%, #b57c1c 40%, #eac56b 100%);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  padding: 0 32rpx 32rpx;
+  margin-top: -48rpx;
+}
+
+.avatar-btn {
+  width: 120rpx;
+  height: 120rpx;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  line-height: 1;
+}
+
+.avatar-btn::after {
+  border: none;
+}
+
+.user-avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  border: 4rpx solid #fff;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.12);
+  background: var(--gold-bg);
+}
+
+.avatar-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f5f3ef, #fefaf0);
+}
+
+.avatar-emoji {
+  font-size: 48rpx;
+}
+
+.user-detail {
+  margin-left: 24rpx;
+  flex: 1;
+}
+
+.user-nickname {
+  font-family: "KaiTi", "STKaiti", "FZXingKai-S04", "FangSong", "STFangsong", serif;
+  font-size: var(--font-lg);
+  font-weight: 700;
+  color: var(--text-title);
+}
+
+.user-role {
+  display: block;
+  font-size: var(--font-xs);
+  color: var(--text-light);
+  margin-top: 4rpx;
+}
+
+.edit-profile-btn {
+  margin-top: 8rpx;
+}
+
+.edit-profile-btn text {
+  font-size: var(--font-xs);
+  color: var(--gold);
+}
+
+/* 登录入口 */
+.login-entry {
+  padding: 24rpx 32rpx 36rpx;
+  text-align: center;
+}
+
+.login-main-btn {
+  width: 100%;
+  height: 88rpx;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: #fff;
+  border-radius: var(--radius-btn);
+  font-size: var(--font-md);
+  font-weight: 600;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-hint {
+  display: block;
+  font-size: var(--font-xs);
+  color: var(--text-light);
+  margin-top: 16rpx;
+}
+
+/* 功能列表 */
+.my-menu {
+  background: #fff;
+  margin: 0 24rpx 24rpx;
+  border-radius: var(--radius-card);
+  box-shadow: 0 2rpx 12rpx rgba(74, 53, 18, 0.04);
+  overflow: hidden;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 28rpx 32rpx;
+  position: relative;
+}
+
+.menu-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 80rpx;
+  right: 32rpx;
+  height: 1rpx;
+  background: #f0ece6;
+}
+
+.menu-item:active {
+  background: rgba(196, 154, 43, 0.06);
+}
+
+.menu-icon {
+  width: 48rpx;
+  font-size: var(--font-lg);
+  text-align: center;
+  margin-right: 20rpx;
+}
+
+.menu-label {
+  flex: 1;
+  font-size: var(--font-base);
+  color: var(--text-body);
+}
+
+.menu-badge {
+  background: var(--gold);
+  color: #fff;
+  font-size: var(--font-xs);
+  min-width: 36rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+  text-align: center;
+  border-radius: 18rpx;
+  padding: 0 10rpx;
+  margin-right: 12rpx;
+}
+
+.menu-arrow {
+  font-size: var(--font-base);
+  color: #d0c8b8;
+}
+
+/* 退出登录项 */
+.logout-item:active {
+  background: rgba(192, 57, 43, 0.06);
+}
+
+/* 底部标识 */
+.footer-signature {
+  text-align: center;
+  padding: 40rpx 0;
+}
+
+.footer-signature text {
+  font-size: var(--font-xs);
+  color: var(--text-light);
+}
+
+/* ===== 弹窗 ===== */
+.modal-mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-dialog {
+  width: 560rpx;
+  background: #fff;
+  border-radius: var(--radius-card);
+  padding: 40rpx 36rpx 28rpx;
+}
+
+.modal-title {
+  font-family: "KaiTi", "STKaiti", "FZXingKai-S04", serif;
+  font-size: var(--font-lg);
+  font-weight: 700;
+  color: var(--text-title);
+  display: block;
+  text-align: center;
+  margin-bottom: 28rpx;
+}
+
+.modal-input {
+  width: 100%;
+  height: 80rpx;
+  border: 2rpx solid var(--dashed);
+  border-radius: var(--radius-btn);
+  padding: 0 24rpx;
+  font-size: var(--font-base);
+  box-sizing: border-box;
+  margin-bottom: 28rpx;
+}
+
+.modal-input:focus {
+  border-color: var(--gold);
+}
+
+.modal-btns {
+  display: flex;
+  gap: 20rpx;
+}
+
+.modal-cancel {
+  flex: 1;
+  height: 72rpx;
+  background: #f5f3ef;
+  color: var(--text-sub);
+  border: none;
+  border-radius: var(--radius-btn);
+  font-size: var(--font-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-confirm {
+  flex: 1;
+  height: 72rpx;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-btn);
+  font-size: var(--font-base);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-confirm.full {
+  flex: none;
+  width: 100%;
+}
+
+/* 编辑资料弹窗 */
+.profile-dialog {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.profile-field {
+  margin-bottom: 24rpx;
+}
+
+.field-label {
+  display: block;
+  font-size: var(--font-sm);
+  color: var(--text-sub);
+  margin-bottom: 8rpx;
+}
+
+.field-picker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72rpx;
+  background: #f5f3ef;
+  border-radius: var(--radius-btn);
+  padding: 0 24rpx;
+}
+
+.field-value {
+  font-size: var(--font-base);
+  color: var(--text-body);
+}
+
+.field-value.placeholder {
+  color: var(--text-light);
+}
+
+.field-arrow {
+  font-size: var(--font-xs);
+  color: var(--text-light);
+}
+
+.field-input {
+  width: 100%;
+  height: 72rpx;
+  background: #f5f3ef;
+  border-radius: var(--radius-btn);
+  padding: 0 24rpx;
+  font-size: var(--font-base);
+  box-sizing: border-box;
+}
+
+.field-textarea {
+  width: 100%;
+  min-height: 120rpx;
+  background: #f5f3ef;
+  border-radius: var(--radius-btn);
+  padding: 16rpx 24rpx;
+  font-size: var(--font-base);
+  box-sizing: border-box;
+}
+
+/* 关于弹窗内容 */
+.about-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16rpx;
+  margin-bottom: 28rpx;
+}
+
+.about-line {
+  font-size: var(--font-sm);
+  color: var(--text-sub);
+  text-align: center;
+}
+
+.about-version {
+  font-size: var(--font-xs);
+  color: var(--text-light);
+  margin-top: 8rpx;
+}

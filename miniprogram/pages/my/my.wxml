@@ -1,0 +1,156 @@
+<view class="my-page">
+  <!-- 用户信息区 -->
+  <view class="user-header">
+    <view class="user-header-bg"></view>
+    <view class="user-info">
+      <button class="avatar-btn" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar">
+        <image wx:if="{{userInfo.avatar}}" class="user-avatar" src="{{userInfo.avatar}}" mode="aspectFill"></image>
+        <view wx:else class="user-avatar avatar-placeholder">
+          <text class="avatar-emoji">👤</text>
+        </view>
+      </button>
+      <view class="user-detail">
+        <text class="user-nickname" wx:if="{{isLoggedIn}}">{{userInfo.nickname || '微信用户'}}</text>
+        <text class="user-nickname" wx:else>未登录</text>
+        <text class="user-role" wx:if="{{isLoggedIn}}">旅行者</text>
+        <view class="edit-profile-btn" wx:if="{{isLoggedIn}}" bindtap="editNickname">
+          <text>✏️ 修改昵称</text>
+        </view>
+      </view>
+    </view>
+    <!-- 未登录时显示登录入口 -->
+    <view class="login-entry" wx:if="{{!isLoggedIn}}">
+      <button class="login-main-btn" bindtap="handleLogin">微信一键登录</button>
+      <text class="login-hint">登录后可同步行程与评价</text>
+    </view>
+  </view>
+
+  <!-- 功能列表 -->
+  <view class="my-menu">
+    <!-- 我的行程 -->
+    <view class="menu-item" bindtap="goToItinerary">
+      <view class="menu-icon">📋</view>
+      <text class="menu-label">我的行程</text>
+      <view class="menu-badge" wx:if="{{itineraryCount > 0}}">{{itineraryCount}}</view>
+      <text class="menu-arrow">→</text>
+    </view>
+
+    <!-- 我的评论 -->
+    <view class="menu-item" bindtap="goToMyReviews">
+      <view class="menu-icon">💬</view>
+      <text class="menu-label">我的评论</text>
+      <text class="menu-arrow">→</text>
+    </view>
+
+    <!-- 收藏的景点 -->
+    <view class="menu-item" bindtap="goToFavorites">
+      <view class="menu-icon">⭐</view>
+      <text class="menu-label">收藏的景点</text>
+      <text class="menu-arrow">→</text>
+    </view>
+
+    <!-- 浏览历史 -->
+    <view class="menu-item" bindtap="goToHistory">
+      <view class="menu-icon">🕐</view>
+      <text class="menu-label">浏览历史</text>
+      <text class="menu-arrow">→</text>
+    </view>
+  </view>
+
+  <view class="my-menu">
+    <!-- 编辑资料 -->
+    <view class="menu-item" wx:if="{{isLoggedIn}}" bindtap="editProfile">
+      <view class="menu-icon">👤</view>
+      <text class="menu-label">编辑个人资料</text>
+      <text class="menu-arrow">→</text>
+    </view>
+
+    <!-- 关于 -->
+    <view class="menu-item" bindtap="showAbout">
+      <view class="menu-icon">ℹ️</view>
+      <text class="menu-label">关于沪上文创地图</text>
+      <text class="menu-arrow">→</text>
+    </view>
+
+    <!-- 退出登录 -->
+    <view class="menu-item logout-item" wx:if="{{isLoggedIn}}" bindtap="handleLogout">
+      <view class="menu-icon">🚪</view>
+      <text class="menu-label" style="color: #c0392b;">退出登录</text>
+    </view>
+  </view>
+
+  <view class="footer-signature">
+    <text>📖 沪上文旅地图 · 探寻海上风华</text>
+  </view>
+
+  <!-- 修改昵称弹窗 -->
+  <view class="modal-mask" wx:if="{{showNicknameModal}}" bindtap="hideNicknameModal">
+    <view class="modal-dialog" catchtap="noop">
+      <text class="modal-title">修改昵称</text>
+      <input class="modal-input" placeholder="请输入新昵称" value="{{newNickname}}" bindinput="onNicknameInput" maxlength="20"/>
+      <view class="modal-btns">
+        <button class="modal-cancel" bindtap="hideNicknameModal">取消</button>
+        <button class="modal-confirm" bindtap="saveNickname">保存</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 编辑个人资料弹窗 -->
+  <view class="modal-mask" wx:if="{{showProfileModal}}" bindtap="hideProfileModal">
+    <view class="modal-dialog profile-dialog" catchtap="noop">
+      <text class="modal-title">编辑个人资料</text>
+
+      <view class="profile-field">
+        <text class="field-label">性别</text>
+        <picker mode="selector" range="{{genderOptions}}" value="{{genderIndex}}" bindchange="onGenderChange">
+          <view class="field-picker">
+            <text class="field-value">{{profileForm.gender || '请选择'}}</text>
+            <text class="field-arrow">▼</text>
+          </view>
+        </picker>
+      </view>
+
+      <view class="profile-field">
+        <text class="field-label">生日</text>
+        <picker mode="date" value="{{profileForm.birthday}}" start="1900-01-01" end="2026-12-31" bindchange="onBirthdayChange">
+          <view class="field-picker">
+            <text class="field-value {{profileForm.birthday ? '' : 'placeholder'}}">{{profileForm.birthday || '请选择生日'}}</text>
+            <text class="field-arrow">▼</text>
+          </view>
+        </picker>
+      </view>
+
+      <view class="profile-field">
+        <text class="field-label">地区</text>
+        <input class="field-input" placeholder="如：上海黄浦" value="{{profileForm.region}}" bindinput="onRegionInput" maxlength="30"/>
+      </view>
+
+      <view class="profile-field">
+        <text class="field-label">个性签名</text>
+        <textarea class="field-textarea" placeholder="介绍一下自己吧…" value="{{profileForm.bio}}" bindinput="onBioInput" maxlength="100" auto-height/>
+      </view>
+
+      <view class="modal-btns">
+        <button class="modal-cancel" bindtap="hideProfileModal">取消</button>
+        <button class="modal-confirm" bindtap="saveProfile">保存</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 关于弹窗 -->
+  <view class="modal-mask" wx:if="{{showAboutModal}}" bindtap="hideAboutModal">
+    <view class="modal-dialog" catchtap="noop">
+      <text class="modal-title">关于沪上文旅地图</text>
+      <view class="about-content">
+        <text class="about-line">🏮 沪上文旅地图</text>
+        <text class="about-line">📌 覆盖上海16区 101个文化地标</text>
+        <text class="about-line">🗺️ 集地图导览、行程规划、文化探索于一体</text>
+        <text class="about-line">📖 深度了解海派历史名人轶事</text>
+        <text class="about-version">版本 1.0.0</text>
+      </view>
+      <view class="modal-btns">
+        <button class="modal-confirm full" bindtap="hideAboutModal">确定</button>
+      </view>
+    </view>
+  </view>
+</view>

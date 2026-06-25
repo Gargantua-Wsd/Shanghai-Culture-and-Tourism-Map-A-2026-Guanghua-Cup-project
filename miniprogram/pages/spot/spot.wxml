@@ -1,0 +1,176 @@
+<scroll-view scroll-y class="spot-page">
+  <!-- 照片轮播 -->
+  <view class="spot-hero" wx:if="{{spot.photos && spot.photos.length > 0}}">
+    <swiper class="photo-swiper" indicator-dots="{{true}}" indicator-color="#d5b880" indicator-active-color="#c49a2b" autoplay="{{true}}" circular="{{true}}">
+      <swiper-item wx:for="{{spot.photos}}" wx:key="*this">
+        <image src="{{item}}" mode="aspectFill" class="hero-image" bindtap="previewPhoto" data-url="{{item}}"></image>
+      </swiper-item>
+    </swiper>
+  </view>
+  <view class="spot-hero-placeholder" wx:else>
+    <view class="hero-empty">
+      <text class="hero-empty-icon">📷</text>
+      <text class="hero-empty-text">暂无实景照片</text>
+    </view>
+  </view>
+
+  <view class="spot-content">
+    <!-- 标题 + 评分 -->
+    <view class="title-block">
+      <text class="spot-name">{{spot.name}}</text>
+      <view class="tags-row">
+        <text class="type-tag">{{spot.typeIcon}} {{spot.typeName}}</text>
+        <text class="district-tag">{{spot.districtName}}</text>
+      </view>
+      <view class="rating-row">
+        <view class="rating-stars">
+          <text class="star-display {{index < avgRating ? 'active' : ''}}" wx:for="{{[1,2,3,4,5]}}" wx:key="*this">★</text>
+        </view>
+        <text class="rating-text">{{avgRatingText}}</text>
+        <text class="rating-count" wx:if="{{comments.length > 0}}">（{{comments.length}}条评价）</text>
+        <text class="rating-count" wx:else>（暂无评价）</text>
+      </view>
+    </view>
+
+    <!-- 一、景点简介 -->
+    <view class="section-block">
+      <view class="section-header">
+        <text class="section-num">一</text>
+        <text class="section-label">景点简介</text>
+      </view>
+      <view class="poem-text" wx:if="{{spot.poem}}">{{spot.poem}}</view>
+      <view class="desc-block">
+        <text class="desc-text">{{spot.description}}</text>
+      </view>
+    </view>
+
+    <!-- 二、景点信息 -->
+    <view class="section-block">
+      <view class="section-header">
+        <text class="section-num">二</text>
+        <text class="section-label">景点信息</text>
+      </view>
+      <view class="info-grid">
+        <view class="info-item">
+          <text class="label">📍 地址</text>
+          <text class="value">{{spot.address}}</text>
+        </view>
+        <view class="info-item">
+          <text class="label">🕒 时间</text>
+          <text class="value">{{spot.openTime}}</text>
+        </view>
+        <view class="info-item">
+          <text class="label">🎫 票价</text>
+          <text class="value">{{spot.price}}</text>
+        </view>
+        <view class="info-item">
+          <text class="label">✨ 亮点</text>
+          <text class="value">{{spot.extra}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 三、景点评论 -->
+    <view class="section-block">
+      <view class="section-header">
+        <text class="section-num">三</text>
+        <text class="section-label">景点评论</text>
+      </view>
+
+      <!-- 评论表单 - 需要登录 -->
+      <view class="comment-form" wx:if="{{isLoggedIn}}">
+        <view class="star-row">
+          <text class="star {{index < myRating ? 'active' : ''}}"
+            wx:for="{{[1,2,3,4,5]}}" wx:key="*this"
+            data-rating="{{item}}"
+            bindtap="setRating"
+          >★</text>
+          <text class="star-hint" wx:if="{{myRating === 0}}">点击评分</text>
+        </view>
+        <textarea
+          class="comment-textarea"
+          placeholder="分享你的游览体验..."
+          placeholder-style="color: #9a9287"
+          maxlength="500"
+          value="{{commentText}}"
+          bindinput="onCommentInput"
+          auto-height
+        />
+        <button class="gold-btn comment-submit" bindtap="submitComment">提交评价</button>
+      </view>
+
+      <!-- 未登录提示 -->
+      <view class="comment-login-hint" wx:if="{{!isLoggedIn}}">
+        <text class="hint-text">🔐 登录后可发表评论</text>
+        <button class="gold-btn comment-login-btn" bindtap="showLoginPrompt">微信登录</button>
+      </view>
+
+      <!-- 评论列表 -->
+      <view class="comment-list" wx:if="{{comments.length > 0}}">
+        <view class="comment-item" wx:for="{{showAllComments ? comments : comments.slice(0, 3)}}" wx:key="id">
+          <view class="comment-meta">
+            <text class="comment-author">{{item.userName || '匿名游客'}}</text>
+            <view class="comment-stars">
+              <text class="star-small {{si < item.rating ? 'active' : ''}}"
+                wx:for="{{[1,2,3,4,5]}}" wx:key="*this" wx:for-item="s" wx:for-index="si"
+              >★</text>
+            </view>
+            <text class="comment-time">{{item.timeStr || item.createdAt}}</text>
+          </view>
+          <text class="comment-content">{{item.content}}</text>
+        </view>
+        <view class="comment-more" wx:if="{{comments.length > 3 && !showAllComments}}" bindtap="showAllReviews">
+          <text>查看全部 {{comments.length}} 条评价 →</text>
+        </view>
+        <view class="comment-more" wx:if="{{comments.length > 3 && showAllComments}}" bindtap="collapseReviews">
+          <text>收起评价 ↑</text>
+        </view>
+      </view>
+      <view class="comment-empty" wx:else>
+        <text>暂无评价，来写第一条吧 ✍️</text>
+      </view>
+    </view>
+
+    <!-- 四、景点百科 -->
+    <view class="section-block">
+      <view class="section-header">
+        <text class="section-num">四</text>
+        <text class="section-label">景点百科</text>
+      </view>
+      <view class="baike-card" bindtap="openBaike">
+        <text class="baike-icon">📚</text>
+        <view class="baike-info">
+          <text class="baike-title">在百度百科中查看「{{spot.name}}」</text>
+          <text class="baike-desc">了解更详细的历史沿革、建筑特色与文化背景</text>
+        </view>
+        <text class="baike-arrow">→</text>
+      </view>
+    </view>
+
+    <!-- 五、名人轶事 -->
+    <view class="section-block" wx:if="{{spot.celebrity && spot.celebrity.name}}">
+      <view class="section-header">
+        <text class="section-num">五</text>
+        <text class="section-label">名人轶事</text>
+      </view>
+      <view class="celebrity-card" bindtap="goPerson">
+        <view class="celebrity-header">
+          <text class="celebrity-name">{{spot.celebrity.name}}</text>
+          <text class="celebrity-more">深入了解 →</text>
+        </view>
+        <text class="celebrity-short">{{spot.celebrity.shortBio}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <button class="outline-btn share-btn" open-type="share">📤 分享</button>
+    <button class="outline-btn fav-btn {{isFavorited ? 'favorited' : ''}}" bindtap="toggleFavorite">
+      {{isFavorited ? '⭐ 已收藏' : '☆ 收藏'}}
+    </button>
+    <button class="gold-btn itinerary-btn" bindtap="addToItinerary">
+      {{inItinerary ? '✅ 已加入行程' : '📍 加入行程'}}
+    </button>
+  </view>
+</scroll-view>

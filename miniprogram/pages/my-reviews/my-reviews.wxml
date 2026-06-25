@@ -1,0 +1,24 @@
+<view class="page">
+  <view class="empty-state" wx:if="{{isEmpty}}">
+    <text class="empty-icon">💬</text>
+    <text class="empty-text">还没有发表过评论</text>
+    <text class="empty-hint">在景点详情页可以发表评论</text>
+    <button class="gold-btn go-btn" bindtap="goWriteReview">去逛逛</button>
+  </view>
+
+  <view class="list" wx:else>
+    <view class="item" wx:for="{{reviews}}" wx:key="id" bindtap="goToSpot" data-id="{{item.spotId}}">
+      <view class="item-header">
+        <text class="spot-name">{{item.spotName}}</text>
+        <view class="stars-row">
+          <text class="star-small {{si < item.rating ? 'active' : ''}}"
+            wx:for="{{[1,2,3,4,5]}}" wx:key="*this" wx:for-item="s" wx:for-index="si"
+          >★</text>
+        </view>
+        <text class="item-time">{{item.timeStr}}</text>
+      </view>
+      <text class="item-content">{{item.content}}</text>
+      <view class="item-del" catchtap="deleteReview" data-index="{{index}}">删除</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,124 @@
+.person-page {
+  min-height: 100vh;
+  background: var(--bg-page);
+}
+
+.person-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60rpx 24rpx 40rpx;
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg-page) 100%);
+}
+
+.person-avatar {
+  width: 140rpx;
+  height: 140rpx;
+  background: linear-gradient(135deg, var(--gold-bg), #efcd8a);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24rpx;
+  box-shadow: 0 8rpx 32rpx rgba(180, 124, 68, 0.2);
+}
+
+.avatar-emoji {
+  font-size: 64rpx;
+}
+
+.person-name {
+  font-size: var(--font-xl);
+  font-weight: 700;
+  color: var(--text-title);
+  margin-bottom: 8rpx;
+}
+
+.person-spot {
+  font-size: var(--font-sm);
+  color: var(--text-poem);
+}
+
+.person-content {
+  padding: 0 24rpx 40rpx;
+}
+
+.short-bio {
+  font-size: var(--font-base);
+  color: var(--text-body);
+  line-height: 1.8;
+}
+
+.full-bio {
+  font-size: var(--font-base);
+  color: var(--text-body);
+  line-height: 1.9;
+}
+
+.culture-card {
+  background: linear-gradient(135deg, rgba(248, 227, 176, 0.3), rgba(254, 250, 240, 0.8));
+  border-color: #f0e0c0;
+}
+
+.culture-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  margin-top: 16rpx;
+}
+
+.culture-tag {
+  padding: 8rpx 24rpx;
+  background: rgba(196, 154, 43, 0.1);
+  color: var(--gold-dark);
+  font-size: var(--font-xs);
+  border-radius: var(--radius-tag);
+  border: 1rpx solid var(--gold-light);
+}
+
+/* 百度百科卡片 */
+.baike-card {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  background: #fff;
+  border: 1rpx solid var(--gold-light);
+  border-radius: var(--radius-card);
+}
+
+.baike-card:active {
+  background: rgba(196, 154, 43, 0.06);
+}
+
+.baike-icon {
+  font-size: 44rpx;
+}
+
+.baike-info {
+  flex: 1;
+}
+
+.baike-title {
+  display: block;
+  font-size: var(--font-base);
+  font-weight: 600;
+  color: var(--text-title);
+  margin-bottom: 4rpx;
+}
+
+.baike-desc {
+  font-size: var(--font-xs);
+  color: var(--text-light);
+}
+
+.baike-arrow {
+  font-size: var(--font-lg);
+  color: var(--gold);
+}
+
+.footer-signature {
+  text-align: center;
+  padding: 40rpx 24rpx 60rpx;
+  color: var(--text-light);
+  font-size: var(--font-xs);
+}

@@ -1,0 +1,45 @@
+{
+  "pages": [
+    "pages/loading/loading",
+    "pages/map/map",
+    "pages/my/my",
+    "pages/spot/spot",
+    "pages/person/person",
+    "pages/webview/webview",
+    "pages/itinerary/itinerary",
+    "pages/favorites/favorites",
+    "pages/history/history",
+    "pages/my-reviews/my-reviews"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fefaf0",
+    "navigationBarTitleText": "沪上文创地图",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f5f3ef"
+  },
+  "tabBar": {
+    "color": "#9a9287",
+    "selectedColor": "#c49a2b",
+    "backgroundColor": "#fefaf0",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/map/map",
+        "text": "🗺️ 地图"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "👤 我的"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "用于在地图上显示您的当前位置并推荐附近景点"
+    }
+  },
+  "requiredPrivateInfos": ["getLocation"],
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

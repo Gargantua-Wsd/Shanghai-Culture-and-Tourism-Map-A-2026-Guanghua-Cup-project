@@ -1,0 +1,43 @@
+<scroll-view scroll-y class="person-page">
+  <view class="person-header">
+    <view class="person-avatar">
+      <text class="avatar-emoji">🌟</text>
+    </view>
+    <text class="person-name">{{person.name}}</text>
+    <text class="person-spot">与「{{spotName}}」相关</text>
+  </view>
+
+  <view class="person-content">
+    <view class="card">
+      <text class="section-title">📝 一句话简介</text>
+      <text class="short-bio">{{person.shortBio}}</text>
+    </view>
+
+    <view class="card">
+      <text class="section-title">📖 深度传记</text>
+      <text class="full-bio">{{person.fullBio}}</text>
+    </view>
+
+    <view class="card culture-card">
+      <text class="section-title">🏷️ 文化印记</text>
+      <view class="culture-tags">
+        <text class="culture-tag">海派文化</text>
+        <text class="culture-tag">历史名人</text>
+        <text class="culture-tag">上海记忆</text>
+      </view>
+    </view>
+
+    <view class="card baike-card" wx:if="{{baikeUrl}}" bindtap="openBaike">
+      <text class="baike-icon">📚</text>
+      <view class="baike-info">
+        <text class="baike-title">在百度百科中查看「{{person.name}}」</text>
+        <text class="baike-desc">了解更详细的生平、事迹与历史评价</text>
+      </view>
+      <text class="baike-arrow">→</text>
+    </view>
+  </view>
+
+  <view class="footer-signature">
+    <text>📖 海派名人录 · 深度了解沪上风华</text>
+  </view>
+</scroll-view>
